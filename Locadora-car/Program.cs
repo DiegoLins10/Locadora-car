@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Locadora_car.Entities;
+using System;
+using System.Globalization;
 
 namespace Locadora_car
 {
@@ -6,7 +8,20 @@ namespace Locadora_car
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Enter rental data");
+            Console.Write("Car model: ");
+            string model = Console.ReadLine();
+            Console.Write("Pickup (dd/MM/yyyy hh:mm): ");
+            DateTime start = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+            Console.Write("Return (dd/MM/yyyy hh:mm): ");
+            DateTime finish = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+
+            Console.Write("Enter price per hour: ");
+            double priceHour = double.Parse(Console.ReadLine());
+            Console.Write("Enter price per day: ");
+            double priceDay = double.Parse(Console.ReadLine());
+
+            CarRental carRental = new CarRental(start, finish, new Vehicle(model));
         }
     }
 }
