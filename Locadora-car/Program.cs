@@ -1,4 +1,5 @@
 ﻿using Locadora_car.Entities;
+using Locadora_car.Services;
 using System;
 using System.Globalization;
 
@@ -17,11 +18,18 @@ namespace Locadora_car
             DateTime finish = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
 
             Console.Write("Enter price per hour: ");
-            double priceHour = double.Parse(Console.ReadLine());
+            double priceHour = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Console.Write("Enter price per day: ");
-            double priceDay = double.Parse(Console.ReadLine());
+            double priceDay = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
             CarRental carRental = new CarRental(start, finish, new Vehicle(model));
+
+            RentalServices rentalServices = new RentalServices(priceHour, priceDay);
+
+            rentalServices.ProcessInvoice(carRental); //pegando o metodo com a regra de negocio do service
+
+            Console.WriteLine("INVOICE: ");
+            Console.WriteLine(carRental.Invoice);
         }
     }
 }
