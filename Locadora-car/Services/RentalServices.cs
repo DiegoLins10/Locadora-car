@@ -3,22 +3,29 @@ using System;
 
 namespace Locadora_car.Services
 {
+    /*
+     * Classe service
+     * gerando para cuidar da regra de negocio
+     */
     class RentalServices
     {
         public double PricePerHour { get; private set; }
         public double PricePerDay { get; private set; }
 
+
+        //instanciando a interface ITaxService
+        private ITaxService _taxService;
+
         /*
          * Construtores
          */
-        public RentalServices(double pricePerHour, double pricePerDay)
+        public RentalServices(double pricePerHour, double pricePerDay, ITaxService taxService)
         {
             PricePerHour = pricePerHour;
             PricePerDay = pricePerDay;
+            _taxService = taxService;
         }
-
-        private BrazilTaxServices _brazilTaxServices = new BrazilTaxServices();
-
+        
         /*
          * processa um objeto car rental
          * e gera a nota do alugel
@@ -38,7 +45,7 @@ namespace Locadora_car.Services
             {
                 basicPayment = PricePerDay * Math.Ceiling(duration.TotalDays);
             }
-            double tax = _brazilTaxServices.Tax(basicPayment);
+            double tax = _taxService.Tax(basicPayment);
 
             carRental.Invoice = new Invoice(basicPayment, tax); 
         }

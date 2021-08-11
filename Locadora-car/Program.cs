@@ -24,7 +24,7 @@ namespace Locadora_car
 
             CarRental carRental = new CarRental(start, finish, new Vehicle(model));
 
-            RentalServices rentalServices = new RentalServices(priceHour, priceDay);
+            RentalServices rentalServices = new RentalServices(priceHour, priceDay, new BrazilTaxServices());
 
             rentalServices.ProcessInvoice(carRental); //pegando o metodo com a regra de negocio do service
 

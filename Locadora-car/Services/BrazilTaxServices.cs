@@ -4,7 +4,7 @@ namespace Locadora_car.Services
     /*
      * Classe para gerar as taxas do brasil
      */
-    class BrazilTaxServices
+    class BrazilTaxServices : ITaxService //herdando e realizacao da interface.
     {
         public double Tax(double amount)
         {
